@@ -1,0 +1,7 @@
+1258792	.
+884524	./.config
+878216	./.config/google-chrome
+813628	./.config/google-chrome/Default
+694908	./.config/google-chrome/Default/Extensions
+273020	./.config/google-chrome/Default/Extensions/gighmmpiobklfepjocnamgkkbiglidom
+273016	./.config/google-chrome/Default/Extensions/gighmmpiobklfepjocnamgkkbiglidom/6.14.2_0

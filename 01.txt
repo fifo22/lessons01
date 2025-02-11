@@ -1,0 +1,74 @@
+Задание 1
+
+du - выводит размер для всех дирректорий
+sort -n -r - сортировка -n(по числовому значению) -r(в обратном порядке)
+head -n 7 - выводит начальные строки -n 7 - количество строк
+> путь/файл - выводит результат выполнения в файл
+cat путь/файл - выводит содержимое файла
+
+Результат:
+fifo@fifo-VMware-Virtual-Platform:~$ du | sort -n -r | head -n 7 > devops/git/test01.txt
+fifo@fifo-VMware-Virtual-Platform:~$ cat devops/git/test01.txt
+1258792	.
+884524	./.config
+878216	./.config/google-chrome
+813628	./.config/google-chrome/Default
+694908	./.config/google-chrome/Default/Extensions
+273020	./.config/google-chrome/Default/Extensions/gighmmpiobklfepjocnamgkkbiglidom
+273016	./.config/google-chrome/Default/Extensions/gighmmpiobklfepjocnamgkkbiglidom/6.14.2_0
+
+*********************************************************************************************
+Задание 2
+
+useradd юзер - создает пользователя
+sudo usermod -aG sudo пользователь - добавляет пользователя в группу sudo
+getent group sudo - выводит всех кто в группе sudo
+deluser пользователь - удаляет пользователя
+
+Результат:
+fifo@fifo-VMware-Virtual-Platform:~$ sudo useradd testsudousr
+[sudo] пароль для fifo: 
+fifo@fifo-VMware-Virtual-Platform:~$ sudo usermod -aG sudo testsudousr
+fifo@fifo-VMware-Virtual-Platform:~$ getent group sudo
+sudo:x:27:fifo,testsudousr
+fifo@fifo-VMware-Virtual-Platform:~$ sudo deluser testsudousr
+info: Удаляется crontab ...
+info: Удаляется пользователь «testsudousr» ...
+fifo@fifo-VMware-Virtual-Platform:~$ getent group sudo
+sudo:x:27:fifo
+fifo@fifo-VMware-Virtual-Platform:~$ 
+
+*********************************************************************************************
+Задание 3
+
+zombie process
+это завершенный процесс, который потерял связь с родительским процессом
+он остается висеть в памяти до завершения родительского процесса
+посмотреть можно:
+fifo@fifo-VMware-Virtual-Platform:~$ ps aux | grep defunct
+fifo        6730  0.0  0.0  17836  2432 pts/0    S+   08:09   0:00 grep --color=auto defunct
+
+ps aux - просмотр всех активных процессов
+grep - утилита для фильтрации текста, в данном случае ищет строки, содержащие defunct
+
+зомби процесс нельзя убить с помощь KILL, для этого сначала нужно найти родительский процесс
+fifo@fifo-VMware-Virtual-Platform:~$ ps -xal | grep defunct
+0  1000    7030    6720  20   0  17836  2432 pipe_r S+   pts/0      0:00 grep --color=auto defunct
+здесь будет 4  колонка PPID - 6720
+или так
+ifo@fifo-VMware-Virtual-Platform:~$ ps -ef | grep defunct
+fifo        7374    6720  0 08:30 pts/0    00:00:00 grep --color=auto defunct
+здесь будет 3  колонка PPID - 6720
+теперь можно его завершить
+kill -KILL 6720
+
+https://losst.pro/zombi-protsessy-linux
+
+*********************************************************************************************
+Задание 4
+
+если вкратце
+top - утилита, позволяющая следить за процессами в режиме реального времени 
+с различными возможностями сортировки, управления
+
+https://losst.pro/komanda-top-v-linux
